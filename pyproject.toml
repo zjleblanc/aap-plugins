@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools >= 64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aap-plugins"
+version = "1.0.0"
+description = "Custom credential plugins for Red Hat Ansible Automation Platform / AWX"
+requires-python = ">= 3.11"
+license = {text = "Apache-2.0"}
+authors = [{name = "Zach LeBlanc"}]
+keywords = ["ansible", "awx", "aap", "credential-plugin", "conjur", "cyberark", "oidc"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Framework :: Ansible",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Systems Administration",
+    "Typing :: Typed",
+]
+dependencies = [
+    "requests",
+    "awx-plugins-core",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+# -------------------------------------------------------------------------
+# Entry points — AWX discovers credential plugins via these groups.
+# awx/main/models/credential.py calls:
+#   entry_points(group='awx_plugins.credentials')
+# and registers each one via CredentialType.load_plugin(ns, plugin)
+#
+# Add new plugins here as they are developed.
+# -------------------------------------------------------------------------
+[project.entry-points."awx_plugins.credentials"]
+conjur_oidc = "aap_plugins.credentials.conjur_oidc:conjur_oidc_plugin"
+
+[project.urls]
+Homepage = "https://github.com/zjleblanc/aap-plugins"
+"GitHub: issues" = "https://github.com/zjleblanc/aap-plugins/issues"
+"GitHub: repo" = "https://github.com/zjleblanc/aap-plugins"
+
+# -------------------------------------------------------------------------
+# Packaging — src layout with implicit namespace packages
+# -------------------------------------------------------------------------
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true
+
+[tool.setuptools.package-dir]
+"" = "src"
