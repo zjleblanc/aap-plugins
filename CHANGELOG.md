@@ -12,3 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CyberArk Conjur Secrets Lookup (OIDC) credential plugin using AAP workload identity (`authn-jwt`).
 - Shared `_types.py` for plugin input and metadata schema definitions.
 - Automatic entry point registration for AWX plugin discovery.
+
+### Changed
+- Refactored documentation structure: moved plugin-specific details to `docs/` folder with snake-case naming and updated top-level `README.md` to link to them.
+- Added a Table of Contents to the top-level `README.md`.
